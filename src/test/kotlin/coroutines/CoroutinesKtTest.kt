@@ -9,11 +9,9 @@ internal class CoroutinesTest {
 
     @Test
     fun test_joinToString() {
-
         val result = runBlocking { joinString() }
 
         assertEquals(result, "hello, coroutine")
-
     }
 }
 
