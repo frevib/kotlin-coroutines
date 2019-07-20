@@ -7,6 +7,10 @@ import org.apache.http.util.EntityUtils
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
+suspend fun <A, B> Iterable<A>.pmap(f: suspend (A) -> B): List<B> = coroutineScope {
+    map { async { f(it) } }.map { it.await() }
+}
+
 
 fun main() {
 
@@ -14,7 +18,7 @@ fun main() {
         println("start!")
 
         (0..10).forEach {
-                launch((Dispatchers.Default)) {
+                launch(Dispatchers.Default) {
                     val response = getRequest(it)
                     println("[${Thread.currentThread().name}] - $response")
                 }
