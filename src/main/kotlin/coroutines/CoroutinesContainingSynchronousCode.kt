@@ -1,14 +1,12 @@
 package coroutines
 
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 
 fun main() {
 
     runBlocking {
 
-        launch {
+        launch(Dispatchers.Default + CoroutineName("X")) {
             // the code running behind makeCoffee (grindBeans(), extractCofee()
             // and addMilk() is running synchronously.
             // So everything inside the the coroutine builder, in this case 'launch()'
@@ -16,7 +14,7 @@ fun main() {
             makeCoffee("X")
         }
 
-        launch {
+        launch(Dispatchers.Default + CoroutineName("Y")) {
             makeCoffee("Y")
         }
     }
