@@ -1,12 +1,16 @@
 package coroutines
 
 
-import kotlinx.coroutines.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+
 
 fun main() {
 
     runBlocking {
-        // this runs in the 'runBlocking' scope.
+        // this coroutine runs in the 'runBlocking' scope.
         // runBlocking will not complete until it's inner coroutines (withoutGlobal()) complete
         launch {
             withoutGlobal()
@@ -32,7 +36,7 @@ val withGlobal = suspend {
 
     // this is not printed as GlobalScope.launch runs as a top-level coroutine, and
     // therefore will not wait until a higher level level coroutine finishes.
-    println("with global")
+    println("with Global")
 
 }
 

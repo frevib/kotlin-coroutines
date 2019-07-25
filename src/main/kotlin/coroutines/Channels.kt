@@ -7,15 +7,14 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 fun main() {
-
     runBlocking {
         val channel = Channel<Int>()
         launch {
-            // Every second an item is put in the channel. Right after sending the item
+            // Every second an item is put in the channel. Right after the item
             // is sent to the channel, this function suspends for 1 second.
             for (x in 1..5) {
-                delay(1000)
                 channel.send(x)
+                delay(1000)
             }
         }
 
